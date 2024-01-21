@@ -202,6 +202,8 @@ class Database implements DatabaseInterface
         if ($this->isCorrectType($parameter, 'default')) {
             if (gettype($parameter) === 'string') {
                 $this->bind($query, "?", "'$parameter'");
+            } else if (gettype($parameter) === 'null') {
+                $this->bind($query, "?", 'NULL');
             } else {
                 $this->bind($query, "?", $parameter);
             }
